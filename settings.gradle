@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'WolfKit'
+
+include ':engine' // Logging, live stream, log files and the dashboard HTTP API. Plain Java.
+include ':core'   // Android library for robot projects: engine, FTC SDK integration and the WolfDash page.
+include ':pedro'  // Optional Pedro Pathing support.
+include ':sim'    // Desktop simulator for developing WolfDash. Not published.

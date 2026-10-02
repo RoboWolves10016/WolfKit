@@ -1,0 +1,7 @@
+title: WolfKit
+description: Logging, live telemetry and tuning for FTC robots.
+remote_theme: just-the-docs/just-the-docs
+color_scheme: light
+aux_links:
+  GitHub: https://github.com/RoboWolves10016/WolfKit
+nav_external_links: []

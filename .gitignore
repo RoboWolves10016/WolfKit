@@ -1,0 +1,7 @@
+.gradle/
+build/
+*.nosync/
+local.properties
+.idea/
+*.iml
+.DS_Store

@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+  Copyright (c) 2026 Clarkston RoboWolves 10016
+  SPDX-License-Identifier: MIT
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WolfDash</title>
+    <script>
+      // Apply the saved theme before first paint.
+      try {
+        const t = localStorage.getItem('wolfdash.theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">WolfDash</div>
+      <div class="layout-picker">
+        <label for="layout-select">Layout</label>
+        <select id="layout-select" class="input"></select>
+        <button id="layout-menu" class="button">Manage</button>
+      </div>
+      <div class="health" role="status">
+        <span id="health-link" class="chip" data-level="critical">Disconnected</span>
+        <span id="health-opmode" class="chip" data-level="idle">No OpMode</span>
+        <span id="health-battery" class="chip" data-level="idle">Battery –</span>
+        <span id="health-loop" class="chip" data-level="idle">Loop –</span>
+      </div>
+      <button id="theme" class="button" title="Switch between light and dark">Theme</button>
+      <button id="stop" class="button danger stop" disabled>Stop OpMode</button>
+    </header>
+    <main id="workspace" class="workspace"></main>
+    <div id="toast" class="toast" role="alert" hidden></div>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

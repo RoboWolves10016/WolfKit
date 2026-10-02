@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.library' version '8.13.2' apply false
+    id 'com.vanniktech.maven.publish' version '0.37.0' apply false
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        maven { url = 'https://repo.dairy.foundation/releases' }
+    }
+
+    // Build output goes to a ".nosync" directory, which iCloud Drive does not sync. In a
+    // synced folder, iCloud can evict build intermediates during a build and stall Gradle.
+    layout.buildDirectory = layout.projectDirectory.dir('build.nosync')
+}
+
+// Publishing settings shared by every published module. Each module sets its own artifact
+// id, name and description.
+subprojects {
+    plugins.withId('com.vanniktech.maven.publish') {
+        mavenPublishing {
+            publishToMavenCentral()
+            // Signing needs a key, which only release builds have. Local publishing works without.
+            if (providers.gradleProperty('signingInMemoryKey').isPresent()) {
+                signAllPublications()
+            }
+
+            pom {
+                url = 'https://github.com/RoboWolves10016/WolfKit'
+                inceptionYear = '2026'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'RoboWolves10016'
+                        name = 'Clarkston RoboWolves 10016'
+                        url = 'https://github.com/RoboWolves10016'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/RoboWolves10016/WolfKit'
+                    connection = 'scm:git:https://github.com/RoboWolves10016/WolfKit.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/RoboWolves10016/WolfKit.git'
+                }
+            }
+        }
+    }
+}

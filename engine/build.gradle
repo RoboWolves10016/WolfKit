@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+    id 'com.vanniktech.maven.publish'
+    id 'ru.vyarus.animalsniffer' version '2.0.1'
+}
+
+// Targets Java 8, as the FTC SDK does, regardless of the JDK running the build.
+tasks.withType(JavaCompile).configureEach {
+    options.release = 8
+}
+
+// Fails the build on use of any API absent from Android 7.0 (API 24), the minimum the FTC
+// SDK supports. This module is plain Java, so the Android toolchain does not check it.
+animalsniffer {
+    sourceSets = [sourceSets.main]
+}
+
+dependencies {
+    signature 'net.sf.androidscents.signature:android-api-level-24:7.0_r2@signature'
+    // Provided by the FTC robot controller app, at these versions.
+    compileOnly 'org.nanohttpd:nanohttpd-websocket:2.3.1'
+    compileOnly 'com.google.code.gson:gson:2.8.0'
+}
+
+mavenPublishing {
+    coordinates(project.group.toString(), 'wolfkit-engine', project.version.toString())
+    pom {
+        name = 'WolfKit Engine'
+        description = 'Logging, live stream and log files for WolfKit. Plain Java; robot projects depend on wolfkit-core.'
+    }
+}

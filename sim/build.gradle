@@ -1,0 +1,18 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation project(':engine')
+    implementation 'org.nanohttpd:nanohttpd-websocket:2.3.1'
+    implementation 'com.google.code.gson:gson:2.8.0'
+}
+
+application {
+    mainClass = 'com.robowolves.wolfkit.sim.Sim'
+}
+
+run {
+    // Serves the page from the source tree, so edits take effect on reload.
+    args rootProject.file('core/src/main/assets/wolfdash').path, rootProject.file('sim/data.nosync').path
+}
